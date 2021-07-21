@@ -1,0 +1,28 @@
+<p>Listado de Herores</p>
+
+<!-- si esto no se cumple pon este template -->
+<div *ngIf="heroeBorrado !== '' ; else noBorrado">
+    <h3>Heroe Borrado: <small>{{heroeBorrado}}</small></h3>
+</div>
+
+<!-- la referencia local uno lo identifica por el simbolo numeral #
+     las referencias locales estan del lado del template -->
+<ng-template #noBorrado>
+    <h3>No ha borrado nada</h3>
+</ng-template>
+
+<button (click)="borrarHeroe()">
+    Borrar heroe
+</button>
+
+<ul>
+    <!-- heroe es la referencia a cada uno de los valores dentro de heroes -->
+    <!-- solo en el caso que se necesite el index se puede extraer de aqui -->
+    <!-- todavia se puede seguir usando el ngFro pero esto es lo mas comun -->
+    <li *ngFor="let heroe of heroes; let i = index">
+       {{i+1}} - {{heroe}} 
+    </li>
+</ul>
+
+
+
