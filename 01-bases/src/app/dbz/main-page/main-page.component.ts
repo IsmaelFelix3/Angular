@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Personaje } from '../interfaces/dbz.interface';
+import { DbzService } from '../services/dbz.service';
 
 @Component({
   selector: 'app-main-page',
@@ -8,41 +9,38 @@ import { Personaje } from '../interfaces/dbz.interface';
 export class MainPageComponent 
 {
 
+  //esto "definir una propiedad en la clase y asignarle un valor (la forma corta de definir propiedades en ts)"
+  //esto se conoce como inyeccion de dependencias
+  //estamos inyectando el servicio en el contructor si pero en este componente
+  // constructor(private DbzService: DbzService)
+  // {
+
+  // }
+
+  
+
+  // get personajes(): Personaje[]
+  // {
+  //   return this.DbzService.personajes;
+  // }
+
   // agregar( event: any)
   // {
   //   event.preventDefault();
   //   console.log('hey');
   // }
 
-  public personajes: Personaje[] = [
-    {
-      nombre: 'Goku',
-      poder: 15000
-    },
-    {
-      nombre: 'Vegeta',
-      poder: 7500
-    }
-  ];
+ 
 
   nuevo: Personaje = {
-    nombre: '',
-    poder: 0
+    nombre: 'Maestro Roshi',
+    poder: 1000
   }
 
-  agregar()
-  {
-    if(this.nuevo.nombre.trim().length === 0){ return;}
-
-    console.log(this.nuevo);
-
-    // this.personajes.push({nombre: this.nuevo.nombre, poder: this.nuevo.poder});
-    this.personajes.push(this.nuevo);
-
-    this.nuevo = {
-      nombre: '',
-      poder: 0
-    }
-  }
+  // agregarNuevoPersonaje( argumento: Personaje )
+  // {
+  //   console.log(argumento);
+  //   this.personajes.push(argumento);
+  // }
 
 }

@@ -1,0 +1,38 @@
+<h3>Agregar <small>{{nuevo.nombre}}</small></h3>
+        <hr>
+        <!-- estrictamente se necesita el signo de dolar $, todo evento que se dispara puede recibir el event -->
+        <!-- esto significa que nos interesa recibir el evento que se esta disparando "todo el evento del form" -->
+        <!-- <form (submit)="agregar( $event )"> -->
+
+        <!-- cuando carge el form module ya me dejo de hacer el submit -->
+
+        <!-- evento personalizado de angular ngSubmit -->
+        <form (ngSubmit)="agregar()">
+
+            <!-- lo que estamos haciendo con estas llaves cuadradas []
+            es indicarle que en el lado de nuestro componente hay una propiedad
+            , una variable hay algun valor el cual yo quiero enlazarlo directamente aqui
+            one way data binding -->
+            <input 
+            placeholder="Nombre" 
+            name="nombre"
+            type="text"
+            [(ngModel)]="nuevo.nombre"
+            />
+
+            <input 
+            placeholder="Poder" 
+            type="number"
+            name="poder"
+            [(ngModel)]="nuevo.poder"
+            />
+                <!-- [(ngModel)] este es el concepto de two way data binding 
+                tanto emite como recibe eventos o propiedades-->
+
+            <!-- [value]="nuevo.poder"
+            (input)="cambiarNombre( $event )" -->
+
+            <button type="submit">
+                Agregar
+            </button>
+        </form>
