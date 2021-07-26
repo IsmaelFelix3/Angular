@@ -1,0 +1,25 @@
+<!-- <ul>
+   <li *ngFor="let gif of resultados">
+    {{gif.title}}
+   </li> 
+</ul> -->
+
+
+<div class="row">
+    <div  *ngFor="let gif of resultados" 
+           class="col-md-4 col-sm-6 animate__animated animate__fadeIn" >
+        <div class="card">
+            <!-- si yo quiero que esto sea igual al valor de esta propiedad, si lo dejo asi seria un string ,
+            pero si necesito que esto sea el valor producto del objeto voy a poner el src entre llaves al igual que al alt -->
+            <img [src]="gif.images.downsized_medium.url" 
+                 [alt]="gif.title"
+                 class="card-img-top">
+            <div class="card-body">
+                <p class="card-text">
+                    {{gif.title}}
+                   
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
