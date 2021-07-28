@@ -3,7 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { PaisService } from '../../services/pais.service';
 // el switch map es uno de los operadores de transformacion que te permite recibir un observable
 // y regresar otro observable
-import { switchMap } from "rxjs/operators";
+// el tap es un operador que dispara un efecto secundario
+import { switchMap, tap } from "rxjs/operators";
+import { Country } from '../../interfaces/pais.interface';
 
 @Component({
   selector: 'app-ver-pais',
@@ -11,8 +13,10 @@ import { switchMap } from "rxjs/operators";
   styles: [
   ]
 })
-export class VerPaisComponent implements OnInit {
-
+export class VerPaisComponent implements OnInit 
+{
+  // pais puede ser nulo
+  pais!: Country;
   // el contructor es antes de que se inicialice
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -35,11 +39,11 @@ export class VerPaisComponent implements OnInit {
       // this.paisService.getPaisPorAlpha(params.id) y por eso el resp no se cambia ya que ya es la respuesta del segundo observavle
       //ahora la repsuesta es el objeto porque ese es el producto de este observable 
       // this.paisService.getPaisPorAlpha(params.id)
-      switchMap((params) => this.paisService.getPaisPorAlpha(params.id) )
+      switchMap((params) => this.paisService.getPaisPorAlpha(params.id) ),
+      // el tap lo que hace es recibe el producto del observabley el tap imprime en consola lo que reciba
+      tap(console.log)
     )
-    .subscribe(resp => {
-      console.log(resp);
-    });
+    .subscribe(pais => this.pais = pais);
 
     // el activated route viene con todo lo necesario para subscribirnos a cualquier cambio del url y lo hacemos asi
     // // se podria hacer asi o podriamos usar la desestructuracion
