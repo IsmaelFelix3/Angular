@@ -1,0 +1,31 @@
+<h2>Busquedas</h2>
+<hr>
+<ul class="list-group">
+    <!-- sale el pais en azul tambien por lo del pathMatch full y como no tiena nada siempre sale, no 
+    pasara esto si tuvieramos algo en el path, lo especificamos con el routerLinkActiveOptions
+    haace que salga si y solo si el path es exactamente igual al path definido en la ruta, literalmente igual a como
+    esta hay-->
+        <li 
+        routerLink=""
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{exact: true}"
+        class="list-group-item"
+    >
+    Buscar pais
+    </li>
+    <li
+        routerLink="region"
+        routerLinkActive="active"
+        class="list-group-item"
+    >
+        Buscar region
+    </li>
+    <!-- el router module importa lo que es el router link -->
+    <li
+        routerLink="capital"
+        routerLinkActive="active"
+        class="list-group-item"
+    >
+        Buscar capital
+    </li>
+</ul>
