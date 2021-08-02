@@ -1,19 +1,39 @@
-<h2>Por Pais</h2>
-<hr>
+<div class="animate__animated animate__fadeIn animate__faster">
+  <h2>Por Pais</h2>
+  <hr>
+  
+  <div class="row">
+      <div class="col">
+      <!-- aqui es donde se va a emitir, aqui voy a escuchar el eevento por eso se ponen parentesis
+          y este va a mandar a llamar al buscar que se encuentra en el por pais component y le voy a mandar el evento
+      dentro de este evento viene el string producto del evento -->
+        <app-pais-input 
+          (onEnter)="buscar( $event )" 
+          (onDebounce)="sugerencias($event)"
+          placeholder="Por Pais">
+        </app-pais-input>
+      </div>
+  </div>
 
-<div class="row">
-    <div class="col">
-    <!-- aqui es donde se va a emitir, aqui voy a escuchar el eevento por eso se ponen parentesis
-        y este va a mandar a llamar al buscar que se encuentra en el por pais component y le voy a mandar el evento
-    dentro de este evento viene el string producto del evento -->
-      <app-pais-input 
-        (onEnter)="buscar( $event )" 
-        (onDebounce)="sugerencias($event)"
-        placeholder="Por Pais">
-      </app-pais-input>
-    </div>
+  <ul *ngIf="mostrarSugerencias" class="list-group">
+    <li *ngFor="let pais of paisesSugeridos" 
+      class="list-group-item list-group-item-action">
+      <a  class="nav-link" 
+          [routerLink]="['/pais',pais.alpha2Code]">
+        {{pais.name}}
+      </a>
+    </li>
+    <li 
+      class="list-group-item list-group-item-action"
+      (click)="buscarSugerido(termino)">
+      <a  class="nav-link" >
+        Buscar "{{termino}}"
+      </a>
+    </li>
+  </ul>
+
+  <hr>
 </div>
-<hr>
 
 <div class="alert alert-danger" *ngIf="hayError">
     No se encontro algo con el termino {{termino}}

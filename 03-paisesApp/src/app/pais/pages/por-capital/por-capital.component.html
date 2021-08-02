@@ -1,19 +1,22 @@
-<h2>Por Capital</h2>
-<hr>
+<div class="animate__animated animate__fadeIn animate__faster">
+  <h2>Por Capital</h2>
+  <hr>
 
-<div class="row">
-    <div class="col">
-    <!-- aqui es donde se va a emitir, aqui voy a escuchar el eevento por eso se ponen parentesis
-        y este va a mandar a llamar al buscar que se encuentra en el por pais component y le voy a mandar el evento
-    dentro de este evento viene el string producto del evento -->
-      <app-pais-input 
-        (onEnter)="buscar( $event )" 
-        placeholder="Por Capital">
-      </app-pais-input>
-      <!-- si lo dejo asi sin llaves manda el placeholder(propiedad) como string -->
-    </div>
+  <div class="row">
+      <div class="col">
+      <!-- aqui es donde se va a emitir, aqui voy a escuchar el eevento por eso se ponen parentesis
+          y este va a mandar a llamar al buscar que se encuentra en el por pais component y le voy a mandar el evento
+      dentro de este evento viene el string producto del evento -->
+        <app-pais-input 
+          (onEnter)="buscar( $event )" 
+          placeholder="Por Capital">
+        </app-pais-input>
+        <!-- si lo dejo asi sin llaves manda el placeholder(propiedad) como string -->
+      </div>
+  </div>
+  <hr>
 </div>
-<hr>
+
 
 <div class="alert alert-danger" *ngIf="hayError">
     No se encontro algo con el termino {{termino}}
