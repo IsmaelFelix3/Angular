@@ -1,0 +1,14 @@
+/* You can add global styles to this file, and also import other style files */
+html, body{
+
+    /* con el css3 ya se pueden poner variables */
+    margin: 10px;
+    background-color: var( --surface-b );
+    /* con esto si se cambia el tema solo necesitamos cambiar la varible y no alguna configuracion */
+    font-family: var( --font-family );
+    
+}
+
+.text-layout{
+    color: var(--text-color)
+}

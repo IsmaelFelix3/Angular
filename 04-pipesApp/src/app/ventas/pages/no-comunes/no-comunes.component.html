@@ -1,0 +1,92 @@
+<div class="text-layout">
+    <h1>Pipes no tan Comunes</h1>
+    <p>
+        Pipes incluidos en Angular - Usualmente en el Common Module
+    </p>
+</div>
+
+<div class="grid">
+    <!-- cuando no establecemos el numero de columnas, le decimos use todo -->
+    <div class="col md:col-6 sm:col-9">
+        <p-fieldset legend="i18nSelect Pipe" [toggleable]="true">
+            <p>
+                Saludos {{nombre}}, es un placer 
+                {{ genero | i18nSelect:invitacionMapa}}
+                a nuestro evento.
+            </p>
+            <button pButton pRipple icon="pi pi-user"
+                    class="p-button-rounded" 
+                    (click)="cambiarPersona()">
+            </button>
+        </p-fieldset>
+    </div>
+    <div class="col md:col-6 sm:col-9">
+        <p-fieldset legend="i18nPlural Pipe" [toggleable]="true">
+            <p>
+                Actualmente {{clientes.length | i18nPlural:clientesMapa}}
+            </p>
+            <button pButton pRipple icon="pi pi-times"
+                    class="p-button-rounded p-button-danger" 
+                    (click)="eliminarPersona()">
+            </button>
+        </p-fieldset>
+    </div>
+    <div class="col md:col-6 sm:col-9">
+        <p-fieldset legend="Slice Pipe" [toggleable]="true">
+
+           <b>Original</b>
+           <pre>{{ clientes }}</pre>
+
+           <b>Slice:0:2</b>
+           <!-- el end excluye su indice (0:2 seria la posicion 0,1 y la dos no)
+                usualemnete el slice se utiliza para cortar la cantidad de elementos 
+                que ustedes quieren mostrar en un arreglo -->
+           <pre>{{ clientes | slice:0:2}}</pre>
+            
+           <b>Slice:0:2</b>
+           <pre>{{ clientes | slice:0:2}}</pre>
+
+           <b>Slice:1:2</b>
+           <pre>{{ clientes | slice:1:2}}</pre>
+
+           <b>Slice:1:3</b>
+           <pre>{{ clientes | slice:1:3}}</pre>
+
+           <b>Slice:3:3</b>
+           <pre>{{ clientes | slice:3:3}}</pre>
+
+           <b>Slice:0:4</b>
+           <pre>{{ nombre | slice:0:4}}</pre>
+
+        </p-fieldset>
+    </div>
+
+    <div class="col md:col-6 sm:col-9">
+        <p-fieldset legend="Json Pipe" [toggleable]="true">
+            <pre>{{heroes | json}}</pre>
+        </p-fieldset>
+    </div>
+
+    <div class="col md:col-6 sm:col-9">
+        <p-fieldset legend="KeyValue Pipe" [toggleable]="true">
+            <ul>
+                <li *ngFor="let item of persona | keyvalue">
+               <b>{{item.key | titlecase}}:</b> {{item.value}}
+                </li>
+            </ul>
+        </p-fieldset>
+    </div>
+    <div class="col md:col-6 sm:col-9">
+        <p-fieldset legend="Async Pipe" [toggleable]="true">
+            <!-- cambia porque el pipe async se suscribe internamente al observable y cada una de sus emiciones es lo
+            que se va a imprimir  -->
+            <pre *ngIf="!(miObservable | async)">Resolviendo observable</pre>
+           <pre>{{miObservable | async}}</pre>
+           <pre *ngIf="!(valorPromesa | async)">Resolviendo Promesa</pre>
+           <pre>{{valorPromesa | async}}</pre>
+        </p-fieldset>
+    </div>
+   
+   
+
+</div>
