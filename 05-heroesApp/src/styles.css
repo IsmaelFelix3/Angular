@@ -2,3 +2,9 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.spacer
+{
+    /* esto se encarga de que el spacer tome todo el espacio que queda restante que empuje todo a los bordes */
+    flex: 1 1 auto;
+}

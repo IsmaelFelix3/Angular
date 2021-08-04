@@ -1,6 +1,70 @@
-<h1>Heroes APP</h1>
-<hr>
+<!-- <h1>Heroes APP</h1>
+<hr> -->
 <!-- siempre tengo el heroes work antes del componente que se busca eso ayuda a cpoder cambiar los estilos dependiendo
     de donde me enceuntro -->
-<router-outlet></router-outlet>
+<!-- <router-outlet></router-outlet> -->
 <!-- para mostrar las rutas hijas se tiene que poner un router-outlet , ya que el padre no permite que las vean. -->
+
+<mat-sidenav-container fullscreen>
+    <mat-sidenav #sidenav mode="push">
+
+        <mat-toolbar>
+            <span>Menu</span>
+            <span class="spacer"></span>
+            <button mat-icon-button
+                    (click)="sidenav.toggle()">
+                <mat-icon>
+                    menu
+                </mat-icon>
+            </button>
+        </mat-toolbar>
+
+        <mat-nav-list>
+            <!-- porque el punto slash porque ya me ecuentro en la ruta de heroes, quiero que sea
+            la misma ruta pero el listado -->
+            <a routerLink="./listado"
+                mat-list-item
+                (click)="sidenav.toggle()">
+                <mat-icon mat-list-icon>label</mat-icon>
+                <span>Listado de Heroes</span>
+            </a>
+        </mat-nav-list>
+        <mat-nav-list>
+            <a routerLink="./agregar"
+                mat-list-item
+                (click)="sidenav.toggle()">
+                <!-- el attributo mat-list-icon es para decirle a material que el icono es parte de una lista 
+                lo que le agrega un padding-->
+                <mat-icon mat-list-icon>add</mat-icon>
+                <span>Añadir Heroe</span>
+            </a>
+        </mat-nav-list>
+        <mat-nav-list>
+            <a routerLink="./buscar"
+                mat-list-item
+                (click)="sidenav.toggle()">
+                <mat-icon mat-list-icon>search</mat-icon>
+                <span>Buscar Heroe</span>
+            </a>
+        </mat-nav-list>
+
+    </mat-sidenav>
+    <mat-toolbar>
+        <button mat-icon-button
+                (click)="sidenav.toggle()">
+            <mat-icon>
+                menu
+            </mat-icon>
+        </button>
+
+        <span class="spacer"></span>
+
+        <button mat-button >Log Out</button>
+    </mat-toolbar>
+
+    <div class="container">
+        <!-- no se muestra porque no hay router outlet -->
+        <router-outlet></router-outlet>
+    </div>
+
+</mat-sidenav-container>

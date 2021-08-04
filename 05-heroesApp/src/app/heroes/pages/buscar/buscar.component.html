@@ -1,1 +1,44 @@
-<p>buscar works!</p>
+<div fxLayout="column">
+    <div>
+        <h1>Buscador de Heroes</h1>
+        <mat-divider></mat-divider>
+    </div>
+    <div fxLayout="column">
+        <h3>Buscardor</h3>
+        <mat-form-field>
+            <mat-label>Number</mat-label>
+            <!-- el ng model se importa del forms module. [()] caja de bananas asi se conoce-->
+            <input type="text"
+                   placeholder="Pick one"
+                   aria-label="Number"
+                   matInput
+                   [(ngModel)]="termino"
+                   [matAutocomplete]="auto"
+                   (input)="buscando()">
+                   <!-- con el input obtenemos el valor de la caja de texto cada ves que la persona escribe -->
+            <mat-autocomplete autoActiveFirstOption 
+                              #auto="matAutocomplete"
+                              (optionSelected)="opcionSeleccionada( $event )">
+                <!-- este value es como un objeto es como si fuera un select, tambien se puede mandar todo el objeto -->
+              <mat-option *ngFor="let heroe of heroes" [value]="heroe">
+                {{heroe.superhero}}
+              </mat-option>
+                <!-- aqui no me funciono el termino.trim().length > 0 marcaba que no puede hacer trim de undefined -->
+                <!-- solucion faltaba poner en '' el termino nose porque en el video no marco error -->
+              <mat-option [value]="" *ngIf="heroes.length === 0 && termino.trim().length > 0">
+                No se encontro nada con el termino {{termino}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+
+    </div>
+</div>
+
+<div>
+    <pre>{{ heroeSeleccionado | json }}</pre>
+    <!-- me marcaba error el heroe que se mandaba agregue el ng if y se quito el error como que angular sabe que primero 
+            heroe seleccionado debe de tener algo y ya se va a la tarjeta, si quito el if marca error -->
+    <div *ngIf="heroeSeleccionado">
+        <app-heroe-tarjeta [heroe]="heroeSeleccionado"></app-heroe-tarjeta>
+    </div>
+</div>

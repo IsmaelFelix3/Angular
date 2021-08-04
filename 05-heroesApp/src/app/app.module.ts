@@ -4,6 +4,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { HttpClientModule } from '@angular/common/http'
+
 import { AppRoutingModule } from './app-routing.module';
 import { HeroesRoutingModule } from './heroes/heroes-routing.module';
 
@@ -18,7 +20,8 @@ import { ErrorPageComponent } from './shared/error-page/error-page.component';
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    HeroesRoutingModule
+    HeroesRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
