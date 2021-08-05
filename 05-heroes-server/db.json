@@ -166,6 +166,15 @@
       "alter_ego": "Norrin Radd",
       "first_appearance": "The Fantastic Four #48",
       "characters": "Norrin Radd"
+    },
+    {
+      "superhero": "Arkham Knight",
+      "alter_ego": "Jason Todd",
+      "characters": "Arkham Knight, Red Hood",
+      "first_appearance": "Primer comic",
+      "publisher": "Marvel Comics",
+      "alt_img": "https://i.pinimg.com/originals/cd/62/db/cd62db32959b1e86461ddef974d298d9.png",
+      "id": "YB_Y2sX"
     }
   ]
 }
