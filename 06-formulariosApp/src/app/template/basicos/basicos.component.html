@@ -1,0 +1,108 @@
+<h2>Template: Basicos</h2>
+<hr>
+
+<div class="row">
+    <div class="col">
+
+        <!-- creamos un referencia local y le especifico que va a ser de tipo ngForm , que enlace la referencia
+             de ngForm a esta variable o a esta propiedad que estoy creando-->
+
+             <!-- con el viewchild ya no se necesita mandar la referencia local en el metodo -->
+        <form (ngSubmit)="guardar()" 
+               #miFormulario="ngForm"
+               autocomplete="off">
+
+            <!-- campo de producto -->
+            <!-- No se puede acceder directamente a miFormulario.producto porque es un control se debe poner
+                miFormulario.controls, marca error porque se le debe poner el ? al producto ya que en el rendreizado aun
+            no esta creado -->
+            <!-- con signo de ? porque puede ser null en un momento -->
+            <!-- se cambia el ngModel por [ngModel]="initForm.producto" -->
+            <div class="mb-3 row">
+                <label class="col-sm-3 col-form-label">Producto</label>
+                <div class="col-sm-9">
+                    <input type="text"
+                           class="form-control"
+                           [ngModel]="initForm.producto"
+                           name="producto"
+                           placeholder="Nombre del producto"
+                           required
+                           minlength="3">
+                    <span class="form-text text-danger"
+                          *ngIf="nombreValido()">
+                    Debe de ser de 3 letras</span>
+                </div>
+            </div>
+
+              <!-- campo de precio del producto -->
+              <div class="mb-3 row">
+                <label class="col-sm-3 col-form-label">Precio</label>
+                <div class="col-sm-9">
+                    <input type="number"
+                           class="form-control"
+                           [ngModel]="initForm.precio"
+                           name="precio"
+                           placeholder="Precio del producto"
+                           required>
+                    <span class="form-text text-danger"
+                           *ngIf="precioValido()">
+                     El precio debe de ser 0 o mayor</span>
+                </div>
+            </div>
+
+            <!-- campo de existencias del producto -->
+            <div class="mb-3 row">
+                <label class="col-sm-3 col-form-label">Existencias</label>
+                <div class="col-sm-9">
+                    <input type="number"
+                           class="form-control"
+                           [ngModel]="initForm.existencias"
+                           name="existencias"
+                           customMin
+                           [minimo]="0"
+                           placeholder="Existencias del producto"
+                           required>
+                           <!-- esta recibiendo el 0 como un numero y no como string porque esta entre corchetes[] -->
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <button type="submit" 
+                            class="btn btn-primary float-end"
+                            [disabled]="miFormulario.invalid">Guardar</button>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col">
+        <span>Valid</span>
+        <pre>{{miFormulario.valid}}</pre>        
+
+        <span>
+            <strong>Pristine: </strong> 
+            <small>significa que no se han cabiado ninguno de los valores con los cuales se presento el formulario</small> 
+        </span>
+        <pre>{{miFormulario.pristine}}</pre>
+
+        <span><strong>Touched: </strong><small>significa que el usuario a tocado el forumulario</small></span>
+        <pre>{{miFormulario.touched}}</pre>
+
+        <span>Value</span>
+        <pre>{{miFormulario.value | json}}</pre>
+
+        <span>CustomDirective</span>
+        <!-- si existe existencias busquese los errores -->
+        <!-- required en true ese es el primer error -->
+        <!-- si pongo un menos el error que muestra es el costum min -->
+        <!-- y si manda un null es que no hay error  -->
+        <pre>{{miFormulario.controls.existencias?.errors | json}}</pre>
+
+    </div>
+</div>
