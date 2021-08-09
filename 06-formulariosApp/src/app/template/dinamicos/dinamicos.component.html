@@ -1,0 +1,93 @@
+<h2>Templates: 
+    <small>Dinamicos</small>
+</h2>
+<hr>
+
+<!-- el ngmodel es para asociarlo al ng form -->
+
+<form (ngSubmit)="guardar()" 
+      autocomplete="off" 
+      #miFormulario="ngForm">
+      <!-- nombre -->
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Nombre</label>
+        <div class="col-sm-9">
+            <input class="form-control" 
+                   placeholder="Nombre " 
+                   type="text"
+                   name="nombre"
+                   [ngModel]="persona.nombre"
+                   required>
+            <span *ngIf="miFormulario.controls.nombre?.errors && miFormulario.controls.nombre?.touched"
+                  class="form-text text-danger">
+                Este campo es obligatorio
+            </span>
+        </div>
+    </div>
+
+    <!-- agregar favorito -->
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Nombre</label>
+        <div class="col-sm-9">
+            <div class="input-group">
+                <input class="form-control" 
+                       placeholder="Agregar favorito"
+                       [(ngModel)]="nuevoJuego"
+                       name="nuevoJuego"
+                       (keyup.enter)="agregarJuego()">
+
+                <button class="btn btn-outline-primary"
+                        type="button"
+                        (click)="agregarJuego()">
+                        <i class="bi-plus-circle"></i>
+                </button>
+                <!-- no necesito mandarle el valor en agregar jeugo porque ya la tengo en la propiedad
+                    nuevo juego -->
+                
+            </div>
+        </div>
+    </div>
+
+    <!-- lista de juegos favoritos -->
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Favoritos</label>
+        <div class="col-sm-9">
+
+            <!-- necesitamos establecerle el valor necesitamos ponerle en ngmodel -->
+            <!-- para emitir el cambio ponemos la caja de bananas en el ngmodel -->
+            <div class="input-group mb-1" *ngFor=" let juego of persona.favoritos; let i = index">
+                <input [(ngModel)]="juego.nombre"
+                       name="favorito_{{i}}"
+                       class="form-control"
+                       required>
+                       <!-- aparece dos veces porque porque para angular el formulario por template este nombre (juego)
+                             es literalmente el mismo en los dos campos es decir el input uno y el dos tienen el mismo name , es 
+                             el mismo nombre para el formulario por template se mira mejor en el inspector -->
+    
+                        <!-- en teoria es el mismo campo , en pocas palabras lo que significa es que tengo que ponerle un nombre diferente -->
+                        <!-- tambien se puede poner asi [name]="'favorito_' + i" pero debe ser un string por eso se concatena el i -->
+                <button class="btn btn-outline-danger" 
+                        type="button"
+                        (click)="eliminar(i)">
+                    <i class="bi-trash"></i>
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <button type="button" 
+                    (click)="guardar()" 
+                    class="btn btn-primary float-end"
+                    [disabled]="miFormulario.invalid">
+                    Guardar
+            </button>
+        </div>
+    </div>
+</form>
+
+
+<span>Persona</span>
+<pre>{{ persona | json }}</pre>
