@@ -1,1 +1,80 @@
-<p>dinamicos works!</p>
+<h2>Reactivos: 
+    <small>Dinamicos</small>
+</h2>
+<hr>
+
+<form autocomplete="off" [formGroup]="miFormulario" (ngSubmit)="guardar()">
+      <!-- nombre -->
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Nombre</label>
+        <div class="col-sm-9">
+            <input class="form-control" 
+                   placeholder="Nombre " 
+                   type="text"
+                   formControlName="nombre">
+            <span *ngIf="campoEsValido('nombre')"
+                  class="form-text text-danger">
+                Este campo es obligatorio
+            </span>
+        </div>
+    </div>
+
+    <!-- agregar favorito -->
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Agregar</label>
+        <div class="col-sm-9" >
+            <!-- se pone controls en favoritos porque se necesitan las colecciones que vienen siendo controls -->
+            <div class="input-group" >
+
+                <input class="form-control" 
+                       placeholder="Agregar favorito"
+                       [formControl]="nuevoFavorito"
+                       (keyup.enter)="agregarFavorito()">
+                       <!-- le mando el valor de i por poner [] no el string i -->
+
+                <button class="btn btn-outline-primary"
+                        type="button"
+                        (click)="agregarFavorito()">
+                        <i class="bi-plus-circle"></i>
+                </button>
+                
+            </div>
+        </div>
+    </div>
+
+    <!-- lista de juegos favoritos -->
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Favoritos</label>
+        <div class="col-sm-9" formArrayName="favoritos">
+
+
+            <div class="input-group mb-1" *ngFor="let favorito of favoritosArr.controls; let i = index">
+                <input class="form-control" [formControlName]="i">
+                <button class="btn btn-outline-danger" 
+                        type="button"
+                        (click)="borrar(i)">
+                    <i class="bi-trash"></i>
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <button type="button" 
+                    class="btn btn-primary float-end"
+                    (click)="guardar()">
+                    Guardar
+            </button>
+        </div>
+    </div>
+</form>
+
+
+<span>value</span>
+<pre>{{ miFormulario.value | json }}</pre>
+<br>
+
+<span>valid</span>
+<pre>{{ miFormulario.valid | json }}</pre>

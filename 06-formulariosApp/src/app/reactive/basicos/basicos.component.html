@@ -1,1 +1,89 @@
-<p>basicos works!</p>
+<h2>Reactivos: Basicos</h2>
+<hr>
+
+<div class="row">
+    <div class="col">
+        <form autocomplete="off" [formGroup]="miFormulario" (ngSubmit)="guardar()">
+            <div class="mb-3 row">
+                <label class="col-sm-3 col-form-label">Producto</label>
+
+                <div class="col-sm-9">
+
+                    <input type="text"
+                           class="form-control"  
+                           formControlName="nombre"                         
+                           placeholder="Nombre del producto">
+                    <!-- no hya que hacer una validacion de seguridad con el ? porque el formulario se creo antes de
+                    que el componente fuera renderizado-->
+
+                    <span class="form-text text-danger"
+                          *ngIf="campoEsValido('nombre')">
+                    Debe de ser de 3 letras</span>
+
+                </div>
+
+            </div>
+
+              <!-- campo de precio del producto -->
+              <div class="mb-3 row">
+                <label class="col-sm-3 col-form-label">Precio</label>
+                <div class="col-sm-9">
+                    <input type="number"
+                           class="form-control"                          
+                           placeholder="Precio del producto"
+                           formControlName="precio">
+                    <span class="form-text text-danger"
+                          *ngIf="campoEsValido('precio')">
+                     El precio debe de ser 0 o mayor</span>
+                </div>
+            </div>
+
+            <!-- campo de existencias del producto -->
+            <div class="mb-3 row">
+                <label class="col-sm-3 col-form-label">Existencias</label>
+                <div class="col-sm-9">
+                    <input type="number"
+                           class="form-control"
+                           placeholder="Existencias del producto"
+                           formControlName="existencias">  
+                           <span class="form-text text-danger"
+                           *ngIf="campoEsValido('existencias')">
+                      El precio debe de ser 0 o mayor</span>          
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <button type="submit" 
+                            class="btn btn-primary float-end"
+                            >
+                           Guardar
+                    </button>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col">
+        <span>Valid</span>
+        <pre>{{miFormulario.valid}}</pre>        
+
+        <span>
+            <strong>Pristine: </strong> 
+            <small>significa que no se han cabiado ninguno de los valores con los cuales se presento el formulario</small> 
+        </span>
+        <pre>{{miFormulario.pristine}}</pre>
+
+        <span><strong>Touched: </strong><small>significa que el usuario a tocado el forumulario</small></span>
+        <pre>{{miFormulario.touched}}</pre>
+
+        <span>Value</span>
+        <pre>{{miFormulario.value | json}}</pre>
+
+    </div>
+</div>
