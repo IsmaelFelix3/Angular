@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, Validator, FormControl } from '@angular/forms';
-import { from } from 'rxjs';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 
 @Component({
   selector: 'app-switches',
@@ -8,6 +8,7 @@ import { from } from 'rxjs';
   styles: [
   ]
 })
+
 export class SwitchesComponent implements OnInit{
 
   constructor(private fb: FormBuilder) { }
