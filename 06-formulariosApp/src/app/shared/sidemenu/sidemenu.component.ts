@@ -49,4 +49,23 @@ export class SidemenuComponent
     }
   ];
 
+  // me estaba fallando porque puse auth/pages/registro y lo mismo con el log in y solo se necesita el auth/registro
+  authMenu: MenuItem[] = [
+    {
+      texto: 'Registro',
+      ruta: './auth/registro'
+    },
+    {
+      texto: 'Login',
+      ruta: './auth/login'
+    }
+  ]
+
+  pruebaMenu: MenuItem[] = [
+    {
+      texto: 'Prueba',
+      ruta: './prueba/prueba'
+    }
+  ]
+
 }

@@ -25,3 +25,31 @@
     </li>
     
 </ul>
+
+<h2 class="mt-3">Validaciones</h2>
+<hr>
+
+<ul class="list-group">
+    <!-- este routerLink es otro arreglo con todos los path que queremos colocar -->
+    <li *ngFor="let item of authMenu"
+        class="list-group-item"
+        [routerLink]="[ item.ruta ]"
+        routerLinkActive="active">
+        {{item.texto}}
+    </li>
+    
+</ul>
+
+<h2 class="mt-3">Prueba</h2>
+<hr>
+
+<ul class="list-group">
+    <!-- este routerLink es otro arreglo con todos los path que queremos colocar -->
+    <li *ngFor="let item of pruebaMenu"
+        class="list-group-item"
+        [routerLink]="[ item.ruta ]"
+        routerLinkActive="active">
+        {{item.texto}}
+    </li>
+    
+</ul>
