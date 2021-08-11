@@ -12,6 +12,27 @@ import { EmailValidatorService } from '../../../shared/validator/email-validator
 })
 export class RegistroComponent implements OnInit
 {
+
+  // el mensaje de error lo tenemos mediante un getter de manera condicional y este getter se va a ejecutar cada ves 
+  // que angular detecte un cambio en el componente
+  get emailErrorMsg(): string
+  {
+    const errors = this.miFormulario.get('email')?.errors;
+    if(errors?.required)
+    {
+      return 'Email es obligatorio';
+    }
+    else if(errors?.pattern)
+    {
+      return 'El valor ingresado no tiene formato de correo';
+    }
+    else if(errors?.emailTomado)
+    {
+      return 'El email ya fue utilizado';
+    }
+
+    return '';
+  }
   ngOnInit()
   {
     this.miFormulario.reset({
@@ -57,21 +78,7 @@ export class RegistroComponent implements OnInit
     this.miFormulario.markAllAsTouched();
   }
 
-  emailRequired()
-  {
-    return this.miFormulario.get('email')?.errors?.required && this.miFormulario.get('email')?.touched
-  }
 
-  emailFormato()
-  {
-    return this.miFormulario.get('email')?.errors?.pattern && this.miFormulario.get('email')?.touched
-  }
 
-  emailTomado()
-  {
-    return this.miFormulario.get('email')?.errors?.emailTomado && this.miFormulario.get('email')?.touched
-  }
-
-  
 
 }
