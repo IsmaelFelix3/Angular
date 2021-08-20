@@ -62,6 +62,7 @@ export class PaisesService {
     });
 
     // rxjs tiene algo interesante que nos permite disparar todas las peticiones de manera simultanea
+    // regresa un observable que contiene una arreglo con todo el producto de cada una de sus peticiones internas
     return combineLatest( peticiones );
   }
 }
