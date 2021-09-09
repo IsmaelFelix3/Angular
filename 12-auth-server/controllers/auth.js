@@ -16,7 +16,7 @@ const crearUsuario = async(req = request, res = response) => {
         if( usuario )
         {
             return res.status(400).json({
-                Ok: false,
+                ok: false,
                 msg: 'El usuario ya existe con ese email'
             });
         }
@@ -37,10 +37,11 @@ const crearUsuario = async(req = request, res = response) => {
 
         // Generar respuesta exitosa
         return res.status(201).json({
-            Ok: true,
+            ok: true,
             uid: dbUser.id,
             name,
-            token
+            token,
+            email: dbUser.email
         })
         
     } 
@@ -70,7 +71,7 @@ const loginUsuario = async(req, res = response) => {
         if( !dbUser )
         {
             return res.status(400).json({
-                Ok: false,
+                ok: false,
                 msg: 'El correo no existe'
             });
         }
@@ -83,7 +84,7 @@ const loginUsuario = async(req, res = response) => {
         if( !validPassword )
         {
             return res.status(400).json({
-                Ok: false,
+                ok: false,
                 msg: 'El password no es valido'
             });
         }
@@ -94,16 +95,17 @@ const loginUsuario = async(req, res = response) => {
         // respuesta del servicio
         // para fines educativos se pone el return pero no hace falta porque es el ultimo paso
         return res.json({
-            Ok: true,
+            ok: true,
             uid: dbUser.id,
             name: dbUser.name,
-            token
+            token,
+            email: dbUser.email
         })
         
     } catch (error) {
         console.log(error);
         return res.status(500).json({
-            Ok: false,
+            ok: false,
             msg: 'Hable con el administrador'
         })
         
@@ -112,14 +114,18 @@ const loginUsuario = async(req, res = response) => {
 
 const  revalidarToken =  async(req, res) => {
 
-    const { uid, name } = req;
+    const { uid } = req;
 
-    const token = await generarJWT(uid, name);
+    // Leer base de datos, el find by id es mucho mas rapido que el find one
+    const dbUser = await Usuario.findById(uid);
+
+    const token = await generarJWT(uid, dbUser.name);
    
     return res.json({
         ok: true,
-        uid,
-        name,
+        uid, 
+        name: dbUser.name,
+        email: dbUser.email,
         token
     });
 }

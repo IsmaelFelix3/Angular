@@ -1,15 +1,17 @@
 
-export interface authResponse
+export interface AuthResponse
 {
-    Ok: boolean,
+    ok: boolean,
     uid?: string,
     name?: string,
     token?: string,
-    msg?: string
+    msg?: string,
+    email?: string
 }
 
 export interface Usuario
 {
     uid: string,
-    name: string
+    name: string,
+    email: string
 }
